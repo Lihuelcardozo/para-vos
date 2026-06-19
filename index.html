@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para vos 💙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* CAMBIO DE FONDO: Degradado en tonos azul pastel y celeste cielo */
+            background: linear-gradient(135deg, #d6e6ff, #b5d1ff);
+            overflow: hidden; 
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.15);
+            max-width: 465px;
+            width: 90%;
+            z-index: 10;
+        }
+
+        /* CAMBIO DE COLOR: Títulos en azul */
+        h1 {
+            color: #2a6fdb;
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+
+        .heart {
+            font-size: 50px;
+            color: #2a6fdb;
+            animation: beat 1.2s infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes beat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        .carta {
+            color: #3a4750;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .carta p {
+            margin-bottom: 12px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            align-items: center;
+            height: 60px;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        /* CAMBIO DE COLOR: Botón "Sí" en azul con sombra combinada */
+        #btn-si {
+            background-color: #2a6fdb;
+            color: white;
+            box-shadow: 0 5px 15px rgba(42, 111, 219, 0.4);
+        }
+
+        #btn-si:hover {
+            transform: scale(1.1);
+            background-color: #4182ec;
+        }
+
+        #btn-no {
+            background-color: #78909c;
+            color: white;
+            position: fixed; 
+            z-index: 999;
+            transition: left 0.1s ease, top 0.1s ease;
+        }
+
+        .oculto {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PANTALLA PRINCIPAL (La disculpa) -->
+    <div class="container" id="pantalla-principal">
+        <div class="heart">💙</div>
+        <h1>Bb</h1>
+        <div class="carta">
+            <p>Escuché cualquier cosa y me armé una película que no era, y por eso me pegué más de la cuenta y terminé entendiendo algo distinto de lo que me querías decir.</p>
+            <p>Perdón por eso 🥺</p>
+            <p style="text-align: center; font-weight: bold; margin-top: 15px; font-size: 1.15rem; color: #2a6fdb;">
+                ¿Me perdonás?
+            </p>
+        </div>
+        <div class="buttons">
+            <button id="btn-si">Sí, te perdono 💙</button>
+            <button id="btn-no">No 😡</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE ÉXITO (La dedicatoria linda) -->
+    <div class="container oculto" id="pantalla-exito">
+        <div class="heart">✨💙✨</div>
+        <h1>¡Gracias mi amor!</h1>
+        <div class="carta">
+            <p>Me puse a hacer esto para vos porque sos muy importante para mí.</p>
+            <p>Gracias por hablar conmigo, por la paciencia, por entenderme incluso cuando me pongo medio goma y por todas las cosas que seguimos construyendo juntes.</p>
+            <p>Tengo muchas ganas de seguir compartiendo planes, salidas, comidas ricas, mimitos y momentos con vos.</p>
+            <p style="text-align: center; font-weight: bold; margin-top: 15px; font-size: 1.2rem; color: #2a6fdb;">
+                Te quiero muchísimo 💙
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const btnSi = document.getElementById('btn-si');
+        const btnNo = document.getElementById('btn-no');
+        const pantallaPrincipal = document.getElementById('pantalla-principal');
+        const pantallaExito = document.getElementById('pantalla-exito');
+
+        function escaparBoton() {
+            const anchoVentana = window.innerWidth;
+            const altoVentana = window.innerHeight;
+
+            const xAleatoria = Math.floor(Math.random() * (anchoVentana - btnNo.clientWidth));
+            const yAleatoria = Math.floor(Math.random() * (altoVentana - btnNo.clientHeight));
+
+            btnNo.style.left = `${xAleatoria}px`;
+            btnNo.style.top = `${yAleatoria}px`;
+        }
+
+        btnNo.addEventListener('mouseenter', escaparBoton);
+        btnNo.addEventListener('touchstart', (e) => {
+            e.preventDefault(); 
+            escaparBoton();
+        });
+
+        btnNo.addEventListener('click', () => {
+            alert('¿De verdad me vas a decir que no? 🥺 ¡Mirá que cambié todo a azul porque sé que te gusta! Dale, decime que sí... 👉👈');
+            escaparBoton();
+        });
+
+        btnSi.addEventListener('click', () => {
+            pantallaPrincipal.classList.add('oculto');
+            pantallaExito.classList.remove('oculto');
+            btnNo.style.display = 'none'; 
+        });
+    </script>
+</body>
+</html>
